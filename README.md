@@ -14,10 +14,10 @@
 * sub：指令替换
 * split：基本块拆分
 * bcf：伪造控制流
+
 ![Image](https://user-images.githubusercontent.com/36320938/131239661-a9ed5ab9-c0b3-452f-aac1-a4309f5e1ab2.png)
 
-使用较低的bcf概率 -mllvm -bcf_prob=3，在开启较高概率时，可以对部分条件进行手动patch，最终在程序运行结束之后会提示一些无法到达的基本块，手动删除即可
-
+使用较低的bcf概率 `-mllvm -bcf_prob=3`，在开启较高概率时，可以对部分条件进行手动patch，最终在程序运行结束之后会提示一些无法到达的基本块，手动删除即可
 
 编译后的CFG（控制流程图）
 
@@ -51,7 +51,7 @@ dump模块内存
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239704-cf2f96c1-6560-4c8f-96b3-8c2cf0b607d6.png)
 
-经过对代码进行一定的修改，使得其可以通过编译（修改后的代码以及上传）
+经过对代码进行一定的修改，使得其可以通过编译（修改后的代码上传到了Release）
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239711-1efd64f4-9593-44e2-b108-7330f520b417.png)
 
@@ -99,7 +99,7 @@ dump模块内存
  jmp    loc_1400013a1
 ```
 
-得到：
+按照上述的方法对代码进行一些调整，得到：
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239739-3ce26cc7-0642-4b65-93b3-34316c9fc6f2.png)
 
@@ -119,7 +119,7 @@ dump模块内存
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239761-9a50ec54-8233-4f43-90f1-4de96c2f0775.png)
 
-诸如此类的逻辑会使得会出现不可能到达的基本块，这是因为ollvm的混淆pass会优先与于llvm的优化pass
+诸如此类的逻辑会出现不可能到达的基本块，这是因为ollvm的混淆pass会优先与于llvm的优化pass
 
 ![image](https://user-images.githubusercontent.com/36320938/131240064-9807f90a-74ec-4210-84bd-16587cd2b966.png)
 
@@ -133,7 +133,7 @@ dump模块内存
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239796-573bbe52-0a6d-4e0b-8d0f-c7f90ce4a950.png)
 
-再按照上述的方法对代码进行一些调整，得到：
+按照上述的方法对代码进行一些调整，得到：
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239800-716dec62-9d1b-4d14-9d64-560793521f98.png)
 
