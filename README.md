@@ -52,7 +52,7 @@
 
 #### 程序在短暂运行后会在当前路径下生成code.asm
 
-![Image](https://user-images.githubusercontent.com/36320938/131239696-aee26fb3-1ced-4303-8cb5-ae0cccd5078e.png)
+![image](https://user-images.githubusercontent.com/36320938/131244309-2552dd1f-236e-4d82-8d5c-03c744d500fa.png)
 
 #### 拿到vs进行编译
 
@@ -124,7 +124,7 @@
 
 #### 短暂运行后，我们过滤掉了无法到达的基本块140001cd7、1400025c5（这里是程序逻辑本身就不可达，并不是BCF，因为我们没有进行patch）
 
-![Image](https://user-images.githubusercontent.com/36320938/131239761-9a50ec54-8233-4f43-90f1-4de96c2f0775.png)
+![image](https://user-images.githubusercontent.com/36320938/131244335-cfc4ce82-2e8e-4a31-9e5d-d9d93616d987.png)
 
 #### 诸如此类的逻辑会出现不可能到达的基本块，这是因为ollvm的混淆pass会优先与于llvm的优化pass
 
