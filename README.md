@@ -230,7 +230,6 @@
 ![Image](https://user-images.githubusercontent.com/36320938/131239801-db1b33d9-47c2-4187-8a0b-b7179cda2dab.png)
 
 <br />
-<br />
 
 ## Reference
 + [deflat](https://github.com/cq674350529/deflat)
@@ -238,7 +237,6 @@
 + [利用符号执行去除控制流平坦化](https://security.tencent.com/index.php/blog/msg/112)
 + [Deobfuscation: recovering an OLLVM-protected program](https://blog.quarkslab.com/deobfuscation-recovering-an-ollvm-protected-program.html)
 
-<br />
 <br />
 
 ## Github
