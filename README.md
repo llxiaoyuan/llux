@@ -192,7 +192,7 @@
 <br />
 <br />
 
-> #### 诸如此类的逻辑会出现不可能到达的基本块，这是因为ollvm的混淆pass会优先与于llvm的优化pass
+> #### 诸如此类的逻辑会出现不可能到达的基本块，这是因为ollvm的混淆pass会优先于llvm的优化pass
 
 ![image](https://user-images.githubusercontent.com/36320938/131240064-9807f90a-74ec-4210-84bd-16587cd2b966.png)
 
