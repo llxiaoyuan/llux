@@ -1,5 +1,6 @@
 # llux
 ## ollvm de-obfuscator
+## 移除ollvm中的控制流平坦化、不透明谓词
 
 ### `ll`取自`ollvm`，`ux`取自`lux`，寓意混淆之中的光亮和线索
 
