@@ -3,72 +3,110 @@
 
 ### `ll`取自`ollvm`，`ux`取自`lux`，寓意混淆之中的光亮和线索
 
-
+![image](https://user-images.githubusercontent.com/36320938/131329596-d1879d97-de90-4dee-a267-13c70a66741c.png)
+![image](https://user-images.githubusercontent.com/36320938/131329631-6143b224-fe21-42df-bfeb-149d5040f61f.png)
+![image](https://user-images.githubusercontent.com/36320938/131329641-7015a02c-f148-423a-a369-ee4799f39558.png)
+![image](https://user-images.githubusercontent.com/36320938/131329649-125eeb73-9219-4336-8068-28e93bd0d5cf.png)
 ![image](https://user-images.githubusercontent.com/36320938/131240568-c1e65560-58f1-4879-99e4-3d593643f0fd.png)
 
+<br />
 
 ### Description
 
-* 实现了在x86_64架构下移除控制流平坦化、不透明谓词
-* 无需条件约束，在遇到BCF增加的死循环块的时候，依然可以完成路径遍历
-* 针对ollvm进行了充分地优化，速度对于符号执行框架angr速度较快，且可以处理复杂样本
-* 暂未开源，因为这样会使得混淆对抗太过于简单，这里只提供了工具方便使用
+> #### * 实现了在x86_64架构下移除控制流平坦化、不透明谓词
+> #### * 无需条件约束，在遇到BCF增加的死循环块的时候，依然可以完成路径遍历
+> #### * 针对ollvm进行了充分地优化，速度对于符号执行框架angr速度较快，且可以处理复杂样本
+> #### * 暂未开源，因为这样会使得混淆对抗太过于简单，这里只提供了工具方便使用
+
+<br />
+<br />
 
 ### Usage
 
-我们有如下代码，使用函数注解的形式开启了ollvm的全部的混淆功能
-* fla：控制流平坦化
-* sub：指令替换
-* split：基本块拆分
-* bcf：伪造控制流
+> #### 我们有如下代码，使用函数注解的形式开启了ollvm的全部的混淆功能，使用较低的bcf概率 `-mllvm -bcf_prob=3`，在开启较高概率时，可以对部分条件进行手动patch，最终在程序运行结束之后会提示一些无法到达的基本块，手动删除即可
+> #### * fla：控制流平坦化
+> #### * sub：指令替换
+> #### * split：基本块拆分
+> #### * bcf：伪造控制流
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239661-a9ed5ab9-c0b3-452f-aac1-a4309f5e1ab2.png)
 
-#### 使用较低的bcf概率 `-mllvm -bcf_prob=3`，在开启较高概率时，可以对部分条件进行手动patch，最终在程序运行结束之后会提示一些无法到达的基本块，手动删除即可
+<br />
+<br />
 
-#### 编译后的CFG（控制流程图）
+> #### 编译后的CFG（控制流程图）
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239668-a9eeea44-7b4f-40d0-a451-a40963e8b653.png)
 
-#### 在要去除混淆的函数入口下断（硬件断点），并运行到
+<br />
+<br />
+
+> #### 在要去除混淆的函数入口下断（硬件断点），并运行到
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239674-41fa70bc-92a9-46c9-8aac-69b564355b38.png)
 
-#### dump堆栈内存
+<br />
+<br />
+
+> #### dump堆栈内存
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239684-9f5fee7b-5601-40db-b801-1ef13b7079ab.png)
 
-#### dump模块内存
+<br />
+<br />
+
+> #### dump模块内存
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239688-48c28159-d7a1-4904-aa6b-e2013992c4c9.png)
 
-#### 编写subroutine.txt
+<br />
+<br />
+
+> #### 编写subroutine.txt
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239689-b1ff4cff-b04a-40fe-a847-9cc903f8a54b.png)
 
-#### 将dump的内存和subroutine.txt按如下方式布局
+<br />
+<br />
+
+> #### 将dump的内存和subroutine.txt按如下方式布局
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239694-fdaf15c3-bbe0-4a18-8922-28c7070824ae.png)
 
-#### 程序在短暂运行后会在当前路径下生成code.asm
+<br />
+<br />
+
+> #### 程序在短暂运行后会在当前路径下生成code.asm
 
 ![image](https://user-images.githubusercontent.com/36320938/131244309-2552dd1f-236e-4d82-8d5c-03c744d500fa.png)
 
-#### 拿到vs进行编译
+<br />
+<br />
+
+> #### 拿到vs进行编译
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239704-cf2f96c1-6560-4c8f-96b3-8c2cf0b607d6.png)
 
-#### 经过对代码进行一定的修改，使得其可以通过编译（修改后的代码上传到了Release）
+<br />
+<br />
+
+> #### 经过对代码进行一定的修改，使得其可以通过编译（修改后的代码上传到了Release）
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239711-1efd64f4-9593-44e2-b108-7330f520b417.png)
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239717-5aafef60-fe29-4d81-95a3-d8715f196b9a.png)
 
-#### 观察到不透明谓词
+<br />
+<br />
+
+> #### 观察到不透明谓词
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239726-16d96b8c-cda7-4064-8588-55f2820fd8de.png)
 
-#### 其中是dword_14001DA48，dword_14001DA4C分别是ollvm bcf功能中的int类型的全局变量x和y，地址连续，值恒为0
+<br />
+<br />
+
+> #### 其中是dword_14001DA48，dword_14001DA4C分别是ollvm bcf功能中的int类型的全局变量x和y，地址连续，值恒为0
 
 ```shell
  mov    eax,dword_14001DA48
@@ -106,47 +144,92 @@
  jmp    loc_1400013a1
 ```
 
-#### 按照上述的方法对代码进行一些调整，得到：
+<br />
+<br />
+
+> #### 按照上述的方法对代码进行一些调整，得到：
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239739-3ce26cc7-0642-4b65-93b3-34316c9fc6f2.png)
 
-#### 使用函数返回值对比验证逻辑的正确性，通过
+<br />
+<br />
+
+> #### 使用函数返回值对比验证逻辑的正确性，通过
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239742-b89d5ef9-a961-45f9-a1df-b17a1693a2ed.png)
 
-#### 按照上述操作，我们同样地实现了更加复杂样本的去混淆
+<br />
+<br />
+
+> #### 我们在基于`angr`框架的`deflat.py`了进行了测试，结果是失败的
+
+![image](https://user-images.githubusercontent.com/36320938/131325445-ed715066-1afc-4c12-98dc-4124e9428726.png)
+
+<br />
+<br />
+
+## UsageEx
+
+> #### 按照上述操作，我们同样地实现了更加复杂样本的去混淆
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239747-24e2cc98-e348-4c60-a282-71f057f3f4f2.png)
 
-#### 编译后的CFG（控制流程图）
+<br />
+<br />
+
+> #### 编译后的CFG（控制流程图）
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239751-5638eb0b-3785-4561-8aa7-438fbfca90db.png)
 
-#### 短暂运行后，我们过滤掉了无法到达的基本块140001cd7、1400025c5（这里是程序逻辑本身就不可达，并不是BCF，因为我们没有进行patch）
+<br />
+<br />
+
+> #### 短暂运行后，我们过滤掉了无法到达的基本块140001cd7、1400025c5（这里是程序逻辑本身就不可达，并不是BCF，因为我们没有进行patch）
 
 ![image](https://user-images.githubusercontent.com/36320938/131244335-cfc4ce82-2e8e-4a31-9e5d-d9d93616d987.png)
 
-#### 诸如此类的逻辑会出现不可能到达的基本块，这是因为ollvm的混淆pass会优先与于llvm的优化pass
+<br />
+<br />
+
+> #### 诸如此类的逻辑会出现不可能到达的基本块，这是因为ollvm的混淆pass会优先与于llvm的优化pass
 
 ![image](https://user-images.githubusercontent.com/36320938/131240064-9807f90a-74ec-4210-84bd-16587cd2b966.png)
 
-#### 手动删除未到达的基本块140001cd7、1400025c5
+<br />
+<br />
 
-#### 手动删除死循环块
+> #### 手动删除未到达的基本块140001cd7、1400025c5
+
+<br />
+<br />
+
+> #### 手动删除死循环块
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239781-d1edd8c9-beff-49f5-91cc-430ee5c22473.png)
 
-#### 手动删除死循环块的引用
+<br />
+<br />
+
+> #### 手动删除死循环块的引用
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239796-573bbe52-0a6d-4e0b-8d0f-c7f90ce4a950.png)
 
-#### 按照上述的方法对代码进行一些调整，得到：
+<br />
+<br />
+
+> #### 按照上述的方法对代码进行一些调整，得到：
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239800-716dec62-9d1b-4d14-9d64-560793521f98.png)
 
-#### 使用函数返回值对比验证逻辑的正确性，通过
+<br />
+<br />
+
+> #### 使用函数返回值对比验证逻辑的正确性，通过
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239801-db1b33d9-47c2-4187-8a0b-b7179cda2dab.png)
+
+<br />
+<br />
 
 ## Reference
 + [deflat](https://github.com/cq674350529/deflat)
