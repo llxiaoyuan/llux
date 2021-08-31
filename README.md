@@ -22,14 +22,11 @@
 <br />
 <br />
 
-<a id="Menu"/>
-
 <a href="#Usage_1">`Usage 1 基本使用`</a>
 
 <a href="#Usage_2">`Usage 2 多个分发器的处理`</a>
 
 <a href="#Usage_3">`Usage 3 bcf的处理`</a>
-
 
 <a id="Usage_1"/>
 
@@ -182,7 +179,7 @@
 
 <a id="Usage_2"/>
 
-## Usage 2 mult dispatcher
+## Usage 2 multi-dispatcher
 
 > #### 按照上述操作，我们同样地实现了更加复杂且拥有多个分发器样本的去混淆
 
