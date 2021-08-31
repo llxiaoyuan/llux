@@ -14,7 +14,7 @@
 
 ### Description
 
-> #### * 实现了在x86_64架构下移除控制流平坦化、不透明谓词
+> #### * 实现了在`x86_64架构下`,`开启代码优化后`,`控制流平坦化`以及`不透明谓词`的移除
 > #### * 实现原理`不同于符号执行`，无需条件约束，在遇到BCF增加的死循环块的时候，依然可以完成路径遍历
 > #### * 针对ollvm进行了充分地优化，速度对于符号执行框架angr速度较快，且可以处理复杂样本
 > #### * 暂未开源，因为这样会使得混淆对抗太过于简单，这里只提供了工具方便使用
@@ -22,9 +22,20 @@
 <br />
 <br />
 
-### Usage
+<a id="Menu"/>
 
-> #### 我们有如下代码，使用函数注解的形式开启了ollvm的全部的混淆功能，使用较低的bcf概率 `-mllvm -bcf_prob=3`，在开启较高概率时，可以对部分条件进行手动patch，最终在程序运行结束之后会提示一些无法到达的基本块，手动删除即可
+<a href="#Usage_1">`Usage 1 基本使用`</a>
+
+<a href="#Usage_2">`Usage 2 多个分发器的处理`</a>
+
+<a href="#Usage_3">`Usage 3 bcf的处理`</a>
+
+
+<a id="Usage_1"/>
+
+### Usage 1
+
+> #### 我们有如下代码，使用函数注解的形式开启了ollvm的全部的混淆功能，使用较低的bcf概率 `-mllvm -bcf_prob=3`，在开启较高概率时，可以对部分条件进行手动patch，最终在程序运行结束之后会提示一些无法到达的基本块，手动删除即可，参考`Usage 3`
 > #### * fla：控制流平坦化
 > #### * sub：指令替换
 > #### * split：基本块拆分
@@ -169,9 +180,11 @@
 <br />
 <br />
 
-## UsageEx
+<a id="Usage_2"/>
 
-> #### 按照上述操作，我们同样地实现了更加复杂样本的去混淆
+## Usage 2 mult dispatcher
+
+> #### 按照上述操作，我们同样地实现了更加复杂且拥有多个分发器样本的去混淆
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239747-24e2cc98-e348-4c60-a282-71f057f3f4f2.png)
 
@@ -228,6 +241,65 @@
 > #### 使用函数返回值对比验证逻辑的正确性，通过
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239801-db1b33d9-47c2-4187-8a0b-b7179cda2dab.png)
+
+<br />
+
+<a id="Usage_3"/>
+
+## Usage 3 bcf patch
+
+> #### 我们将`Usage 1`中的代码使用默认的`bcf`概率`-mllvm -bcf_prob=30`进行编译，相较于`-mllvm -bcf_prob=3`的概率明显复杂了一些。我们需要寻找类似箭头所指的`bcf块`，特点是有多个前驱，后继为分发器，这种情况是因为编译优化造成的
+
+![Image](https://user-images.githubusercontent.com/36320938/131495997-df5b8748-426e-4bcd-9b8c-efb4fb9231fd.png)
+
+<br />
+<br />
+
+> #### `bcf块`内容如下，一般情况两个`cmov`都是条件都是满足的，可以看做`mov`
+
+![Image](https://user-images.githubusercontent.com/36320938/131496021-acf36a3e-0b8b-4922-b456-f1fcd5aefcf7.png)
+
+<br />
+<br />
+
+> #### 所以逐一对`bcf块`的所有前驱进行简单的`patch`操作
+
+![Image](https://user-images.githubusercontent.com/36320938/131496109-58f38a41-458c-4a40-909f-7d3228e71695.png)
+
+<br />
+<br />
+
+> #### 对`bcf`块进行`nop`操作
+
+![Image](https://user-images.githubusercontent.com/36320938/131496134-3f4ba3fc-85c0-4fa7-b923-a2712ea1257c.png)
+
+<br />
+<br />
+
+> #### 按照`Usage 1`中演示的方法进行操作。`llux`对一些基本块进行了合并，并提示了无法到达的基本块
+
+![Image](https://user-images.githubusercontent.com/36320938/131496180-90d8a757-86fa-47d8-b1af-e0124177e376.png)
+
+<br />
+<br />
+
+> #### 手动删除因为基本块合并导致重定义的符号
+
+![Image](https://user-images.githubusercontent.com/36320938/131496213-0ccc307a-d75c-4245-8247-d0702fa82caf.png)
+
+<br />
+<br />
+
+> #### 并按照之前的方法对代码进行一定的调整，最终得到
+
+![Image](https://user-images.githubusercontent.com/36320938/131496222-8e5b6f16-c9a3-410c-b3b8-fb5c7afd3f28.png)
+
+<br />
+<br />
+
+> #### 使用函数返回值对比验证逻辑的正确性，通过
+
+![Image](https://user-images.githubusercontent.com/36320938/131496229-0811f348-fa97-4be1-9100-3c032ece378d.png)
 
 <br />
 
