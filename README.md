@@ -311,5 +311,5 @@
 ## Github
 https://github.com/llxiaoyuan/llux
 
-## [Stantinko ollvm 浅析](https://github.com/llxiaoyuan/llux/blob/main/Stantinko.md)
+## [Stantinko ollvm 浅析](Stantinko.md)
 
