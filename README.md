@@ -117,14 +117,14 @@
 
 > #### 其中是dword_14001DA48，dword_14001DA4C分别是ollvm bcf功能中的int类型的全局变量x和y，地址连续，值恒为0
 
-```shell
+```asm
  mov    eax,dword_14001DA48
  
  手动修改成如下代码化简逻辑
  
  mov    eax,0
 ```
-```shell
+```asm
  cmp    dword_14001DA4C, 0ah
  cmovl  eax, r13d
  
@@ -133,7 +133,7 @@
 ;cmp    dword_14001DA4C, 0ah
  mov    eax, r13d
 ```
-```shell
+```asm
  mov    eax, 0ff85a711h
  mov    ecx, 4ef55c6dh
  cmovl  eax, ecx
