@@ -15,8 +15,8 @@
 ### Description
 
 > #### * 实现了在`x86_64架构下`,`开启代码优化后`,`控制流平坦化`以及`不透明谓词`的移除
-> #### * 实现原理`不同于符号执行`，无需条件约束，在遇到BCF增加的死循环块的时候，依然可以完成路径遍历
-> #### * 针对ollvm进行了充分地优化，速度对于符号执行框架angr速度较快，且可以处理复杂样本
+> #### * 实现原理`不同于符号执行`，无需条件约束，在遇到`BCF`增加的死循环块的时候，依然可以完成路径遍历
+> #### * 针对`ollvm`进行了充分地优化，速度对于符号执行框架`angr`速度较快，且可以处理复杂样本
 > #### * 暂未开源，因为这样会使得混淆对抗太过于简单，这里只提供了工具方便使用
 
 <br />
@@ -32,7 +32,7 @@
 
 ### Usage 1
 
-> #### 我们有如下代码，使用函数注解的形式开启了ollvm的全部的混淆功能，使用较低的bcf概率 `-mllvm -bcf_prob=3`，在开启较高概率时，可以对部分条件进行手动patch，最终在程序运行结束之后会提示一些无法到达的基本块，手动删除即可，参考`Usage 3`
+> #### 我们有如下代码，使用函数注解的形式开启了`ollvm`的全部的混淆功能，使用较低的bcf概率 `-mllvm -bcf_prob=3`，在开启较高概率时，可以对部分条件进行手动`patch`，最终在程序运行结束之后会提示一些无法到达的基本块，手动删除即可，参考`Usage 3`
 > #### * fla：控制流平坦化
 > #### * sub：指令替换
 > #### * split：基本块拆分
@@ -43,7 +43,7 @@
 <br />
 <br />
 
-> #### 编译后的CFG（控制流程图）
+> #### 编译后的`CFG`（控制流程图）
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239668-a9eeea44-7b4f-40d0-a451-a40963e8b653.png)
 
@@ -57,49 +57,49 @@
 <br />
 <br />
 
-> #### dump堆栈内存
+> #### `dump`堆栈内存
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239684-9f5fee7b-5601-40db-b801-1ef13b7079ab.png)
 
 <br />
 <br />
 
-> #### dump模块内存
+> #### `dump`模块内存
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239688-48c28159-d7a1-4904-aa6b-e2013992c4c9.png)
 
 <br />
 <br />
 
-> #### 编写subroutine.txt
+> #### 编写`subroutine.txt`
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239689-b1ff4cff-b04a-40fe-a847-9cc903f8a54b.png)
 
 <br />
 <br />
 
-> #### 将dump的内存和subroutine.txt按如下方式布局
+> #### 将`dump`得到的内存和`subroutine.txt`按如下方式布局
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239694-fdaf15c3-bbe0-4a18-8922-28c7070824ae.png)
 
 <br />
 <br />
 
-> #### 程序在短暂运行后会在当前路径下生成code.asm
+> #### 程序在短暂运行后会在当前路径下生成`code.asm`
 
 ![image](https://user-images.githubusercontent.com/36320938/131244309-2552dd1f-236e-4d82-8d5c-03c744d500fa.png)
 
 <br />
 <br />
 
-> #### 拿到vs进行编译
+> #### 拿到`Visual Studio`进行编译
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239704-cf2f96c1-6560-4c8f-96b3-8c2cf0b607d6.png)
 
 <br />
 <br />
 
-> #### 经过对代码进行一定的修改，使得其可以通过编译（修改后的代码上传到了Release）
+> #### 经过对代码进行一定的修改，使得其可以通过编译（修改后的代码上传到了`Release`）
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239711-1efd64f4-9593-44e2-b108-7330f520b417.png)
 
