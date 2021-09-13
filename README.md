@@ -115,7 +115,7 @@
 <br />
 <br />
 
-> #### 其中是`dword_14001DA48`，`dword_14001DA4C`分别是`ollvm` `bcf`（伪造控制流）功能中的`int`类型的全局变量`x`和`y`，地址连续，值恒为0
+> #### 其中是`dword_14001DA48`，`dword_14001DA4C`分别是`ollvm` `bcf`（伪造控制流）功能中的`int`类型的全局变量`x`和`y`，地址连续，值恒为`0`
 
 ```asm
  mov    eax,dword_14001DA48
@@ -245,7 +245,7 @@
 
 ## Usage 3 bcf patch
 
-> #### 我们将`Usage 1`中的代码使用默认的`bcf`概率`-mllvm -bcf_prob=30`进行编译，相较于`-mllvm -bcf_prob=3`的概率明显复杂了一些。我们需要寻找类似箭头所指的`bcf块`，特点是有多个前驱，后继为分发器，这种情况是因为编译优化造成的
+> #### 我们将`Usage 1`中的代码使用默认的`bcf`概率`-mllvm -bcf_prob=30`进行编译，相较于`-mllvm -bcf_prob=3`的概率明显复杂了一些。我们需要寻找类似箭头所指的`bcf`块，特点是有多个前驱，后继为分发器，这种情况是因为编译优化造成的
 
 ![Image](https://user-images.githubusercontent.com/36320938/131495997-df5b8748-426e-4bcd-9b8c-efb4fb9231fd.png)
 
@@ -259,7 +259,7 @@
 <br />
 <br />
 
-> #### 所以逐一对`bcf块`的所有前驱进行简单的`patch`操作
+> #### 所以逐一对`bcf`块的所有前驱进行简单的`patch`操作
 
 ![Image](https://user-images.githubusercontent.com/36320938/131496109-58f38a41-458c-4a40-909f-7d3228e71695.png)
 
