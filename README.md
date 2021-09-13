@@ -108,14 +108,14 @@
 <br />
 <br />
 
-> #### 观察到不透明谓词
+> #### 观察到`bcf`（伪造控制流）
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239726-16d96b8c-cda7-4064-8588-55f2820fd8de.png)
 
 <br />
 <br />
 
-> #### 其中是dword_14001DA48，dword_14001DA4C分别是ollvm bcf功能中的int类型的全局变量x和y，地址连续，值恒为0
+> #### 其中是`dword_14001DA48`，`dword_14001DA4C`分别是`ollvm` `bcf`（伪造控制流）功能中的`int`类型的全局变量`x`和`y`，地址连续，值恒为0
 
 ```asm
  mov    eax,dword_14001DA48
@@ -188,28 +188,28 @@
 <br />
 <br />
 
-> #### 编译后的CFG（控制流程图）
+> #### 编译后的`CFG`（控制流程图）
 
 ![Image](https://user-images.githubusercontent.com/36320938/131239751-5638eb0b-3785-4561-8aa7-438fbfca90db.png)
 
 <br />
 <br />
 
-> #### 短暂运行后，我们过滤掉了无法到达的基本块140001cd7、1400025c5（这里是程序逻辑本身就不可达，并不是BCF，因为我们没有进行patch）
+> #### 短暂运行后，我们过滤掉了无法到达的基本块`140001cd7`、`1400025c5`（这里是程序逻辑本身就不可达，并不是BCF，因为我们没有进行`patch`）
 
 ![image](https://user-images.githubusercontent.com/36320938/131244335-cfc4ce82-2e8e-4a31-9e5d-d9d93616d987.png)
 
 <br />
 <br />
 
-> #### 诸如此类的逻辑会出现不可能到达的基本块，这是因为ollvm的混淆pass会优先于llvm的优化pass
+> #### 诸如此类的逻辑会出现不可能到达的基本块，这是因为`ollvm`的混淆`pass`会优先于`llvm`的优化`pass`
 
 ![image](https://user-images.githubusercontent.com/36320938/131240064-9807f90a-74ec-4210-84bd-16587cd2b966.png)
 
 <br />
 <br />
 
-> #### 手动删除未到达的基本块140001cd7、1400025c5
+> #### 手动删除未到达的基本块`140001cd7`、`1400025c5`
 
 <br />
 <br />
