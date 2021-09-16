@@ -13,7 +13,7 @@
 
 ![image](https://user-images.githubusercontent.com/36320938/132167350-03ae9539-3a5c-4ecb-a79c-8903ed427a49.png)
 
-> 一些函数的控制流流程图(CGF)
+> 一些函数的控制流流程图(CFG)
 
 ![image](https://user-images.githubusercontent.com/36320938/132168574-c5d49339-ec50-4a08-a945-8141bf8e8f77.png)
 
